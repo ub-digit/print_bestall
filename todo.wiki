@@ -1,6 +1,20 @@
 = todo =
+== läget ==
+Fungerar på staging nu.
+Filerna verkar dock inte skrivas ut på skrivarn.
 
+= todo-list =
+
+* [ ] kontrollera deployment på staging
+  * [ ] skriver bestall-appen filerna med rätt rättighet (666) till mappen files?
+  * [ ] skriver bestall-appen filerna med rätt användare (apps/www-data?) till mappen files?
+  * [ ] skriver bestall_print.sh filerna med rätt rättighet (666) till mappen files?
+  * [ ] skriver bestall_print.sh filerna med rätt användare (apps/www-data?) till mappen files?
 * [ ] skydda appen
+* [ ] införliva cronjobbet i repot
+* [ ] införliva relevanta förändringar i apache konfigurationen till repot
+* [ ] skapa deployscript enl. deployment på staging
+* [ ] testa deploy-scriptet (genom att börja om på staging eller göra det på lab?)
 == reprint.html ==
 
 * [ ] Korrekta skrivar/bibliotekskoder (hårdkodat)
