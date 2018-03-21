@@ -1,6 +1,7 @@
 = todo =
 == läget ==
 Fungerar på staging nu.
+Har inte påfört lokala förändringar från staging till repot.
 Filerna verkar dock inte skrivas ut på skrivarn.
 
 = todo-list =
