@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Radera poster</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" href="main.css" />
+
+    <script src="jquery.js"></script>
+    <script src="main.js"></script>
+ <link rel="stylesheet" href="jquery-ui.css"> 
+ <script src="jquery-1.12.4.js"></script>
+ <script src="jquery-ui.js"></script>
+<script>
+ $( function() {
+   $( "#enhetDiv" ).dialog({
+     modal: true,
+    title: "Välj enhet"
+    });
+ } );
+ </script>
+
+</head>
+<body id="reprint">
+
+
+<div id="enhetDiv" style="display: none;">
+  <select id="enhetSelect" name="enhet" size="7" >
+  <option value="62">Biblioteket för musik och dramatik          </option>
+  <option value="40">Biomedicinska biblioteket                   </option>
+  <option value="48">Ekonomiska biblioteket                      </option>
+  <option value="44">Humanistiska biblioteket                    </option>
+  <option value="60">Konstbiblioteket                            </option>
+  <option value="47">Pedagogiska biblioteket                     </option>
+  <option value="42">Samhällsvetenskapliga biblioteket           </option>
+</select>
+</div> <!-- id="enhetDiv" -->
+<div id="fileSelDiv">
+<select id='fileSelect' name='fileSelect' size='17' multiple style="display: none;" >
+</select> 
+</div> <!-- id="fileSelDiv" -->
+
+<div id="dateSelectorDiv" style="display: none;">
+  <table id="infoTable">
+    <tr>
+      <td colspan=2>I Från-fältet skriver du (till exempel):</td>
+    </tr>
+      <td>08:40</td>
+      <td>väljer allt från 08:40 idag.</td>
+    </tr>
+    <tr>
+      <td>2018-05-01 12:00</td>
+      <td>väljer allt från 12:00 den första maj</td>
+    </tr>
+    <tr>
+      <td>2018-04-01</td>
+      <td>väljer allt från första april och framåt.</td>
+    </tr>
+    <tr>
+      <td colspan=2><br />I Till-fältet kan du på samma sätt begränsa slutdatum.</td>
+    </tr>
+  </table>
+  <table>
+    <tr>
+        <td>Från</td>
+        <td><input type="text" id="fromDate" value="" /></td>
+    </tr>
+    <tr>
+        <td>Till</td>
+        <td><input type="text" id="toDate" value="" /></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td><input type="button" id="datesBtn" value="Hitta filer" />
+          <input type="button" class="cancelBtn" value="Avbryt" />
+      </td>
+    </table>
+
+  </div>
+</div> <!-- id="dateSelectorDiv" -->
+
+<div id="filesPreviewDiv" style="display: none;">
+  <div id="resultDiv">
+  </div> <!-- id="resultDiv" -->
+  <input type="button" id="reprintBtn" value="Skriv ut" />
+  <input type="button" class="cancelBtn" value="Avbryt" />
+</div> <!-- id="filesPreviewDiv" -->
+
+<div id="finalDiv" style="display: none;">
+  <div id="finalResultDiv"></div>
+  <input type="button" class="cancelBtn" value="Börja om" />
+</div>
+
+</body>
+</html>

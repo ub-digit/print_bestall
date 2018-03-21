@@ -1,0 +1,45 @@
+= todo =
+
+* [ ] skydda appen
+== reprint.html ==
+
+* [ ] Korrekta skrivar/bibliotekskoder (hårdkodat)
+* [X] stoppa in fillista som element i en multiselect, value:filnamn,  visa endast datum/tid
+* [X] val av ett antal filer genererar en utfillista
+* [X] utfillistan submittas till reprint.cgi
+
+== reprint.cgi ==
+=== IN ===
+
+* [X] skapa infillista från done-katalogen baserat på skrivarval i reprint.html, skickar denna till reprint.html
+
+
+=== UT ===
+* [X] tar emot utfillistan från reprint.html och skriver detta till en temporär fil - utfil.tmp
+* [X] engagerar reprint.sh med utfil.tmp som argument
+
+== reprint.sh ==
+
+* [X] flyttar filerna i utfil.tmp till rätt ställe
+* [X] raderar utfil.tmp
+
+
+
+
+
+
+
+
+
+[X] Skriva startdatum och slutdatum i textrutor, så kommer den skriva ut allt mellan dessa intervall
+[X] Skriv hur många filer det är INNAN man gör själva utskriften
+
+
+[X] Sekunder behövs inte
+[X] Om ett datumfält är tomt skall "nu" gälla (ie fyller man inte i till-datum skall den skriva ut allt till och med nu)
+[X] Om man bara anger klockslag är det idag man menar
+[X] Knapparna skall inte synas samtidigt, utan när man har tryckt på "Hitta filer" skall "Skriv ut igen" synas
+[X] En avbryt-knapp som nollställer alla val
+[X] Dela upp sidan i sektioner, kanske öppna något modalt, så man inte kan byta bibliotek när man valt ett datum och fått upp "Skriv ut igen"-knappen
+[X] Nollställ hela sidan när man trycker avbryt
+[X] Avbryt skall bara vara synlig om något finns att avbryta
