@@ -43,7 +43,7 @@ if     ($action eq "send"){
 	$files =~ s/&fileSelect=/\r\n/g;
  	print $fh "$files";
 	close $fh;
-	system("./reprint.sh " . $rePrintFileList . " " . $appDir);
+	system("../scripts/reprint.sh " . $rePrintFileList . " " . $appDir);
 }elsif ($action eq "calculate"){
 
 	$filesDir=$appDir . "/files/done";
