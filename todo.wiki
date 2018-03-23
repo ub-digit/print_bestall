@@ -1,21 +1,102 @@
 = todo =
 == läget ==
-Fungerar på staging nu.
-Har inte påfört lokala förändringar från staging till repot.
 Filerna verkar dock inte skrivas ut på skrivarn.
+Vissa skrivare är helt enkelt disablade. Se: lpstat -p -d
+Dom som funkar just nu är pr41 pr43 pr45 pr46 pr49 pr50.
 
-= todo-list =
+== todo-list ==
 
-* [ ] kontrollera deployment på staging
-  * [ ] skriver bestall-appen filerna med rätt rättighet (666) till mappen files?
-  * [ ] skriver bestall-appen filerna med rätt användare (apps/www-data?) till mappen files?
-  * [ ] skriver bestall_print.sh filerna med rätt rättighet (666) till mappen files?
-  * [ ] skriver bestall_print.sh filerna med rätt användare (apps/www-data?) till mappen files?
-* [ ] skydda appen
-* [ ] införliva cronjobbet i repot
-* [ ] införliva relevanta förändringar i apache konfigurationen till repot
+* [X] kontrollera deployment på staging
+  * [X] skriver bestall-appen filerna med rätt rättighet (666) till mappen files?
+  * [X] skriver bestall-appen filerna med rätt användare (apps/www-data?) till mappen files?
+  * [X] skriver bestall_print.sh filerna med rätt rättighet (666) till mappen files?
+  * [X] skriver bestall_print.sh filerna med rätt användare (apps/www-data?) till mappen files?
+* [X] skydda appen
+* [X] flytta htaccessfilen till /etc/htpasswd/print_bestall
+* [X] ändra urlen från 
+       https://bestall-staging.ub.gu.se/print_bestall/html/reprint.html till
+       https://bestall-staging.ub.gu.se/print_bestall
+       innebär att reprint.html skall byta namn till index.html
+* [X] ändra cronscriptet så att det anropar 
+      /apps/bestall/print_bestall/scripts/print_bestall.sh istf. 
+      /apps/bestall/print_bestall.sh
+* [X] införliva cronjobbet i repot
+* [X] flytta reprint.sh från cgi-bin till scripts
+* [X] stänga av indexing i print_bestall-katalogen
+* [X] införliva relevanta förändringar i apache konfigurationen till config-repot
+      github.com/config/servers/app-staging-1/etc/apache2/sites-available
+      github.com/config/servers/app-staging-1/etc/apache2/mods-enabled
+* [X] förutsättnintg: Installera DBI.pm
 * [ ] skapa deployscript enl. deployment på staging
 * [ ] testa deploy-scriptet (genom att börja om på staging eller göra det på lab?)
+
+
+
+== Dokumentation ==
+=== htpasswd ===
+/etc/htpasswd/print_bestall/.htpasswd 664 apps:apps
+/etc/htpasswd/print_bestall           755 apps:apps  # print_bestall ägs av apps eftersom apps äger appen print_bestall
+/etc/htpasswd                         755 root:root
+/etc                                  755 root:root
+=== apache2 ===
+* cgid-modulen behövde enablas
+  a2enmod cgid
+* redigerade bestall-staging.conf
+förändringarna versionshanterade i 
+* github.com/config/servers/app-staging-1/etc/apache2/sites-available och
+* github.com/config/servers/app-staging-1/etc/apache2/mods-enabled
+
+=== cron ===
+/etc/cron.d/print_bestall             644 root:root
+=== perl ===
+DBI.pm måste finnas
+== DEPLOY ==
+"REPO"   betyder uppdaterad github-arbetskatalog av print_bestall
+"CONFIG" betyder uppdaterad github-arbetskatalog av config
+"TARGET" betyder i detta exempel app-staging-1-maskinen
+* kopiera REPO:etc/cron.d till TARGET:/etc/cron.d/print_bestall # (644 root:root)
+* kontrollera att DBI.pm är installerad                  # perl -e 'use DBI;' som root, skall gå rent
+* kontrollera att vhost-filen för bestall är uppdaterad från config-reposet: ex:
+  CONFIG:servers/app-staging-1/etc/apache2/sites-available/bestall-staging.conf
+* installera 
+  * från CONFIG:servers/app-staging-1/etc/htpasswd/print_bestall/.htpasswd
+  * till TARGET:/etc/htpasswd/print_bestall
+* kopiera i sin helhet katalogerna från REPO: till TARGET:/apps/bestall/print_bestall
+  * cgi-bin
+  * html
+  * scripts
+  * samt .htaccess-filen
+
+resultatet skall ha följande struktur, ägarskap och rättigheter:
+
+.
+├── [-rw-r--r-- apps     apps    ]  .htaccess
+├── [drwxr-xr-x apps   apps  ]  cgi-bin
+│   └── [-rwxr-xr-x apps   apps  ]  reprint.cgi
+├── [drwxr-xr-x apps   apps  ]  html
+│   ├── [drwxr-xr-x apps   apps  ]  external
+│   │   └── [drwxr-xr-x apps   apps  ]  jquery
+│   │       └── [-rw-r--r-- apps   apps  ]  jquery.js
+│   ├── [drwxr-xr-x apps   apps  ]  images
+│   │   ├── [-rw-r--r-- apps   apps  ]  ui-icons_444444_256x240.png
+│   │   ├── [-rw-r--r-- apps   apps  ]  ui-icons_555555_256x240.png
+│   │   ├── [-rw-r--r-- apps   apps  ]  ui-icons_777620_256x240.png
+│   │   ├── [-rw-r--r-- apps   apps  ]  ui-icons_777777_256x240.png
+│   │   ├── [-rw-r--r-- apps   apps  ]  ui-icons_cc0000_256x240.png
+│   │   └── [-rw-r--r-- apps   apps  ]  ui-icons_ffffff_256x240.png
+│   ├── [-rw-r--r-- apps   apps  ]  index.html
+│   ├── [-rw-r--r-- apps   apps  ]  jquery-ui.min.css
+│   ├── [-rw-r--r-- apps   apps  ]  jquery-ui.min.js
+│   ├── [-rw-r--r-- apps   apps  ]  jquery-ui.structure.min.css
+│   ├── [-rw-r--r-- apps   apps  ]  jquery-ui.theme.min.css
+│   ├── [-rw-r--r-- apps   apps  ]  main.css
+│   └── [-rw-r--r-- apps   apps  ]  main.js
+└── [drwxr-xr-x apps   apps  ]  scripts
+    ├── [-rwxr-xr-x apps     apps      ]  print_bestall.sh
+    └── [-rwsr-sr-x www-data www-data  ]  reprint.sh
+
+
+
 == reprint.html ==
 
 * [ ] Korrekta skrivar/bibliotekskoder (hårdkodat)
@@ -37,14 +118,6 @@ Filerna verkar dock inte skrivas ut på skrivarn.
 
 * [X] flyttar filerna i utfil.tmp till rätt ställe
 * [X] raderar utfil.tmp
-
-
-
-
-
-
-
-
 
 [X] Skriva startdatum och slutdatum i textrutor, så kommer den skriva ut allt mellan dessa intervall
 [X] Skriv hur många filer det är INNAN man gör själva utskriften
