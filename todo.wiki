@@ -11,7 +11,7 @@ Dom som funkar just nu är pr41 pr43 pr45 pr46 pr49 pr50.
   * [X] skriver bestall-appen filerna med rätt användare (apps/www-data?) till mappen files?
   * [X] skriver bestall_print.sh filerna med rätt rättighet (666) till mappen files?
   * [X] skriver bestall_print.sh filerna med rätt användare (apps/www-data?) till mappen files?
-* [X] skydda appen
+* [X] skydda appen, även files-katalogen
 * [X] flytta htaccessfilen till /etc/htpasswd/print_bestall
 * [X] ändra urlen från 
        https://bestall-staging.ub.gu.se/print_bestall/html/reprint.html till
@@ -26,9 +26,10 @@ Dom som funkar just nu är pr41 pr43 pr45 pr46 pr49 pr50.
 * [X] införliva relevanta förändringar i apache konfigurationen till config-repot
       github.com/config/servers/app-staging-1/etc/apache2/sites-available
       github.com/config/servers/app-staging-1/etc/apache2/mods-enabled
-* [X] förutsättnintg: Installera DBI.pm
-* [ ] skapa deployscript enl. deployment på staging
-* [ ] testa deploy-scriptet (genom att börja om på staging eller göra det på lab?)
+* [X] förutsättning: Installera DBI.pm
+* [X] skapa deployscript enl. deployment på staging
+* [X] testa deploy-scriptet (genom att börja om på staging eller göra det på lab?)
+* [X] htaccess till bestall/files och /print_bestall
 
 
 
@@ -48,8 +49,10 @@ förändringarna versionshanterade i
 
 === cron ===
 /etc/cron.d/print_bestall             644 root:root
+
 === perl ===
 DBI.pm måste finnas
+ssh-askpass måste vara installerad: apt install ssh-askpass
 == DEPLOY ==
 "REPO"   betyder uppdaterad github-arbetskatalog av print_bestall
 "CONFIG" betyder uppdaterad github-arbetskatalog av config

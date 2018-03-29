@@ -17,7 +17,7 @@ my $enhet    = $cgi->param('enhet');
 my $files    = $cgi->param('fileSelect');
 my $fromDate = $cgi->param('fromDate');
 my $toDate   = $cgi->param('toDate');
-my $appDir   = "/tmp/koha-940/apps/BirdHome/html/MoveFiles";
+my $appDir   = "/apps/bestall";
 
 my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst)=localtime(time);
 my $timestamp = sprintf ( "%04d%02d%02d%02d%02d",$year+1900,$mon+1,$mday,$hour+1,$min);
@@ -73,8 +73,7 @@ if     ($action eq "send"){
 	}
 
 }elsif ($action eq "show"){
-	#$filesDir="../html/MoveFiles/exp/done";
-	$filesDir="/tmp/koha-940/apps/BirdHome/html/MoveFiles/files/done";
+    $filesDir=$appDir . "/files/done";
 	$fileListString=`ls -w 1 $filesDir | grep "_pr${enhet}_" | sort -t "_" -k3 -r`;
 	$fileListString =~ s/^([^_]+_[^_]+_(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})\d{2}_.*)$/<option value="$1">$2-$3-$4 $5:$6<\/option>\n/mg;
 

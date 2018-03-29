@@ -1,6 +1,6 @@
 body {
 	width: 80em;
-	background-color:moccasin;
+	background-color:#a3aaa3;
 }
 
 #dateSelectorDiv {
@@ -10,5 +10,12 @@ body {
 	border:thin black solid;
 	width:95%;
 	padding:1em;
+	margin:1em;
+}
+div#enhetDiv {
+	background-color: floralwhite;
+}
+div.toolbarDiv {
+	text-align:center;
 	margin:1em;
 }

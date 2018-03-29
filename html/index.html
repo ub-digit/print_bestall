@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>Radera poster</title>
+  <title>Upprepa utskrift av vissa beställningar</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <link rel="stylesheet" href="main.css" />
   <link rel="stylesheet" href="jquery-ui.min.css"> 
@@ -61,33 +61,41 @@
   </table>
   <table>
     <tr>
-        <td>Från</td>
-        <td><input type="text" id="fromDate" value="" /></td>
+      <td>Från</td>
+      <td><input type="text" id="fromDate" value="" /></td>
     </tr>
     <tr>
-        <td>Till</td>
-        <td><input type="text" id="toDate" value="" /></td>
+      <td>Till</td>
+      <td><input type="text" id="toDate" value="" /></td>
     </tr>
-    <tr>
-      <td>&nbsp;</td>
-      <td><input type="button" id="datesBtn" value="Hitta filer" />
-          <input type="button" class="cancelBtn" value="Avbryt" />
-      </td>
-    </table>
-
-  </div>
+  </table>
+  <div class="toolbarDiv"> <!-- class="toolbarDiv" -->
+    <div class="buttonDiv"> <!-- class="buttonDiv" -->
+      <input type="button" id="datesBtn" value="Hitta filer" />
+      <input type="button" class="cancelBtn" value="Avbryt" />
+    </div> <!-- class="buttonDiv" -->
+  </div> <!-- class="toolbarDiv" -->
+</div>
 </div> <!-- id="dateSelectorDiv" -->
 
 <div id="filesPreviewDiv" style="display: none;">
   <div id="resultDiv">
   </div> <!-- id="resultDiv" -->
-  <input type="button" id="reprintBtn" value="Skriv ut" />
-  <input type="button" class="cancelBtn" value="Avbryt" />
+  <div class="toolbarDiv"> <!-- class="toolbarDiv" -->
+    <div class="buttonDiv"> <!-- class="buttonDiv" -->
+      <input type="button" id="reprintBtn" value="Skriv ut" />
+      <input type="button" class="cancelBtn" value="Avbryt" />
+    </div> <!-- class="buttonDiv" -->
+  </div> <!-- class="toolbarDiv" -->
 </div> <!-- id="filesPreviewDiv" -->
 
 <div id="finalDiv" style="display: none;">
   <div id="finalResultDiv"></div>
-  <input type="button" class="cancelBtn" value="Börja om" />
+  <div class="toolbarDiv"> <!-- class="toolbarDiv" -->
+    <div class="buttonDiv"> <!-- class="buttonDiv" -->
+      <input type="button" class="cancelBtn" value="OK!" />
+    </div> <!-- class="buttonDiv" -->
+  </div> <!-- class="toolbarDiv" -->
 </div>
 
 </body>
